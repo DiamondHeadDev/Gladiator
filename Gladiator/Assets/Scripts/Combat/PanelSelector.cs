@@ -11,7 +11,7 @@ public class PanelSelector : MonoBehaviour
     void Start()
     {
         Weapon w = new Weapon();
-        w.Damage = 4;
+        w.Damage = 7;
         options = new Weapon[10];
         options[0] = w;
         print(options[0].Damage);
@@ -19,6 +19,6 @@ public class PanelSelector : MonoBehaviour
 
     public void OnSelectObject()
     {
-        battleSystem.transferEnemy();
+        battleSystem.PanelAttack(options[0]);
     }
 }

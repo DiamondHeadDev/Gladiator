@@ -29,6 +29,10 @@ public class BattleSystem : MonoBehaviour
     {
         playerAndroid = player.GetComponent<Android>();
         enemyAndroid = enemy.GetComponent<Android>();
+        enemyAndroid.setName("Jeff");
+        enemyAndroid.resetHP(10);
+        playerAndroid.setName("Player");
+        playerAndroid.resetHP(10);
         eventText.text = enemyAndroid.getName() + " Approaches.";
 
         yield return new WaitForSeconds(0f);
@@ -45,7 +49,6 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyAttack()
     {
-
         yield return new WaitForSeconds(1f);
     }
 
@@ -54,10 +57,22 @@ public class BattleSystem : MonoBehaviour
         
     }
 
-    public void transferEnemy()
+    public void PanelAttack(Weapon wep)
     {
+        bool isDead = enemyAndroid.TakeDamage(wep.Damage);
+        print(enemyAndroid.getCurrentHP());
         state = BattleState.ENEMYTURN;
-        StartCoroutine(EnemyTurn());
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
     }
 
     public IEnumerator EnemyTurn()
@@ -65,6 +80,7 @@ public class BattleSystem : MonoBehaviour
         print(playerAndroid.getCurrentHP());
         print("Enemy Turn");
         setActivePanels(false);
+        eventText.text = enemyAndroid.getName() + " strikes for 5 damage.";
         bool isDead = playerAndroid.TakeDamage(5);
 
         print(playerAndroid.getCurrentHP());

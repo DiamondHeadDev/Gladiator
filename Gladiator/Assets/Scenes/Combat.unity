@@ -831,6 +831,7 @@ GameObject:
   - component: {fileID: 445295453}
   - component: {fileID: 445295452}
   - component: {fileID: 445295451}
+  - component: {fileID: 445295454}
   m_Layer: 5
   m_Name: RightPanel
   m_TagString: Untagged
@@ -895,6 +896,19 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 0}
   m_SizeDelta: {x: 300, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &445295454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445295450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c195973540d2ca4d89fa01917ceeb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleSystem: {fileID: 712765400}
 --- !u!1 &454590490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,8 +1317,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnSelectWeapon
+      - m_Target: {fileID: 445295454}
+        m_MethodName: OnSelectObject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

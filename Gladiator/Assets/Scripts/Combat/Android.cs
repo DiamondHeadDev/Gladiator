@@ -9,6 +9,16 @@ public class Android : MonoBehaviour
     private int maxHP;
     private int currentHP;
 
+    public Android() { }
+
+    public Android(string androidName, int id, int maxHP, int currentHP)
+    {
+        this.androidName = androidName;
+        this.id = id;
+        this.maxHP = maxHP;
+        this.currentHP = currentHP;
+    }
+
     public bool TakeDamage(int dmg)
     {
         currentHP -= dmg;
@@ -54,5 +64,11 @@ public class Android : MonoBehaviour
     public void setMaxHP(int hp)
     {
         maxHP = hp;
+    }
+
+    public void resetHP(int hp)
+    {
+        maxHP = hp;
+        currentHP = maxHP;
     }
 }
