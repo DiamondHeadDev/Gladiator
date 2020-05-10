@@ -8,6 +8,8 @@ public class BattleSystem : MonoBehaviour
 {
     public GameObject player;
     public GameObject enemyPrefab;
+    public GameObject leftPanel;
+    public GameObject rightPanel;
 
     public BattleState state;
     // Start is called before the first frame update
@@ -19,23 +21,28 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
         state = BattleState.PLAYERTURN;
         PlayerTurn();
     }
 
     IEnumerator PlayerAttack()
     {
-        //Damage the enemy
-        yield return new WaitForSeconds(1f);
+        setActivePanels(true);
 
-        //check if enemy dead
-        //change state based on what happened
+        yield return new WaitForSeconds(1f);
     }
 
     void PlayerTurn()
     {
         
+    }
+
+    public IEnumerator EnemyTurn()
+    {
+        print("hi");
+        yield return new WaitForSeconds(1f);
+
     }
 
     public void OnAttackButton()
@@ -46,5 +53,26 @@ public class BattleSystem : MonoBehaviour
         }
 
         StartCoroutine(PlayerAttack());
+    }
+
+    public void OnDefendButton()
+    {
+        setActivePanels(true);
+    }
+
+    public void OnTalkButton()
+    {
+        setActivePanels(true);
+    }
+
+    public void OnItemButton()
+    {
+        setActivePanels(true);
+    }
+
+    public void setActivePanels(bool display)
+    {
+        leftPanel.SetActive(display);
+        rightPanel.SetActive(display);
     }
 }
