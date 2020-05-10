@@ -6,8 +6,19 @@ public class PanelSelector : MonoBehaviour
 {
     public BattleSystem battleSystem;
 
-    public void OnSelectWeapon()
+    public Weapon[] options;
+
+    void Start()
     {
-        StartCoroutine(battleSystem.EnemyTurn());
+        Weapon w = new Weapon();
+        w.Damage = 4;
+        options = new Weapon[10];
+        options[0] = w;
+        print(options[0].Damage);
+    }
+
+    public void OnSelectObject()
+    {
+        battleSystem.transferEnemy();
     }
 }

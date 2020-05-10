@@ -1,26 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystem : MonoBehaviour
 {
     public GameObject player;
-    public GameObject enemyPrefab;
+    public GameObject enemy;
     public GameObject leftPanel;
     public GameObject rightPanel;
+    public Text eventText;
+    private SceneNav sceneNav;
+    Android playerAndroid;
+    Android enemyAndroid;
 
     public BattleState state;
     // Start is called before the first frame update
     void Start()
     {
+        sceneNav = new SceneNav();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
     }
 
     IEnumerator SetupBattle()
     {
+        playerAndroid = player.GetComponent<Android>();
+        enemyAndroid = enemy.GetComponent<Android>();
+        eventText.text = enemyAndroid.getName() + " Approaches.";
+
         yield return new WaitForSeconds(0f);
         state = BattleState.PLAYERTURN;
         PlayerTurn();
@@ -33,16 +43,57 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
+    IEnumerator EnemyAttack()
+    {
+
+        yield return new WaitForSeconds(1f);
+    }
+
     void PlayerTurn()
     {
         
     }
 
+    public void transferEnemy()
+    {
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
     public IEnumerator EnemyTurn()
     {
-        print("hi");
-        yield return new WaitForSeconds(1f);
+        print(playerAndroid.getCurrentHP());
+        print("Enemy Turn");
+        setActivePanels(false);
+        bool isDead = playerAndroid.TakeDamage(5);
 
+        print(playerAndroid.getCurrentHP());
+        yield return new WaitForSeconds(0.0f);
+        print("test");
+        if (isDead)
+        {
+            state = BattleState.LOST;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.PLAYERTURN;
+            PlayerTurn();
+        }
+    }
+
+    void EndBattle()
+    {
+        if (state == BattleState.WON)
+        {
+            sceneNav.loadScene("Victory");
+            //dialogueText.text = "You won the battle!";
+        }
+        else if (state == BattleState.LOST)
+        {
+            sceneNav.loadScene("Defeat");
+            //dialogueText.text = "You were defeated.";
+        }
     }
 
     public void OnAttackButton()

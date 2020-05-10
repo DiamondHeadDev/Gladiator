@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Android : MonoBehaviour
 {
-    public string name;
-    public int id;
-    public int maxHP;
-    public int currentHP;
+    private string androidName;
+    private int id;
+    private int maxHP;
+    private int currentHP;
 
     public bool TakeDamage(int dmg)
     {
@@ -24,5 +24,35 @@ public class Android : MonoBehaviour
         currentHP += amount;
         if (currentHP > maxHP)
             currentHP = maxHP;
+    }
+
+    public string getName()
+    {
+        return androidName;
+    }
+
+    public void setName(string name)
+    {
+        androidName = name;
+    }
+
+    public int getCurrentHP()
+    {
+        return currentHP;
+    }
+
+    public void setCurrentHP(int hp)
+    {
+        currentHP = hp;
+    }
+
+    public int getMaxHP()
+    {
+        return maxHP;
+    }
+
+    public void setMaxHP(int hp)
+    {
+        maxHP = hp;
     }
 }
