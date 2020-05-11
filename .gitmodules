@@ -1,0 +1,3 @@
+[submodule "Gladiator/Assets/Gladiator/assets/GitMerge-for-Unity"]
+	path = Gladiator/Assets/Gladiator/assets/GitMerge-for-Unity
+	url = git@github.com:FlaShG/GitMerge-for-Unity.git
